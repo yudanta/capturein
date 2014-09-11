@@ -1,0 +1,10 @@
+#ignore virtualenv 
+bin/
+include/
+lib/ 
+
+#ignore .pyc
+*.pyc
+
+#ignore .python
+.Python
