@@ -3,6 +3,9 @@ bin/
 include/
 lib/ 
 
+#ignore content
+contents/captured_img/
+
 #ignore .pyc
 *.pyc
 
