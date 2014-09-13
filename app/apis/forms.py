@@ -9,3 +9,9 @@ class RegisterForm(Form):
 	username = TextField('username', [Required()])
 	email = TextField('email', [Required(), Email()])
 	password = TextField('password', [Required()])
+
+class LoginForm(Form):
+	username = TextField('username', [Required()])
+	password = TextField('password', [Required()])
+
+	

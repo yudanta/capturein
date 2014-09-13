@@ -11,9 +11,9 @@ DEBUG = True
 #--------------------------------------
 MONGODB_DATABASE = "capturein"
 MONGODB_HOST = "127.0.0.1"
-MONGODB_PORT = 32380 #32380
-MONGODB_USERNAME = "capture"
-MONGODB_PASSWORD = "in-dong"
+MONGODB_PORT = 27017 #32380
+MONGODB_USERNAME = None #"capture"
+MONGODB_PASSWORD = None #"in-dong"
 
 #--------------------------------------
 # AWS Config #nuwira access key

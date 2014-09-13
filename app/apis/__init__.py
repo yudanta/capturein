@@ -19,7 +19,7 @@ from app.helpers.S3Helper import S3Helper
 
 from app.tasksqueue.tasks import capture_image
 
-from app.apis.forms import RegisterForm
+from app.apis.forms import RegisterForm, LoginForm
 
 from app.decorators.authdecorators import *
 
@@ -58,6 +58,22 @@ def adduser():
 	else:
 		return RestHelper().build_response(412, 412, register_form.errors, 'hmm... we missing some params')
 
+@apis.route('/auth', methods=['POST'])
+def auth_user():
+	login_form = LoginForm(csrf_enabled = False)
+	if login_form.validate_on_submit():
+		user = db.User.find_one({'$or':[{'username':login_form.username.data}, {'email':login_form.username.data}]})
+		if user:
+			#check password hash is valid or not
+			if HashHelper().check_md5_hash(login_form.password.data, user.password):
+				#renew token and save and return data
+				user.token_key = unicode(HashHelper().generate_random_string(32))
+				user.save()
+				return RestHelper().build_response(200, 200, {"token_key": user.token_key}, 'Yay... you have been authenticate, please use your token wisely')
+			else:
+				return RestHelper().build_response(403, 403, {}, 'So sorry, we can\'t match your password with your email account')
+		else:
+			return RestHelper().build_response(403, 403, {}, 'Your username or email are not found, we can\'t authenticate, so sorry')
 
 @apis.route('/get_image', methods=['GET'])
 @token_required('GET')
