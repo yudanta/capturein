@@ -10,10 +10,10 @@ DEBUG = True
 # MongkoKit Config
 #--------------------------------------
 MONGODB_DATABASE = "capturein"
-MONGODB_HOST = "Amanda-MacBook-Pro.local"
-MONGODB_PORT = 27017 #32380
-MONGODB_USERNAME = None
-MONGODB_PASSWORD = None
+MONGODB_HOST = "127.0.0.1"
+MONGODB_PORT = 32380 #32380
+MONGODB_USERNAME = "capture"
+MONGODB_PASSWORD = "in-dong"
 
 #--------------------------------------
 # AWS Config #nuwira access key

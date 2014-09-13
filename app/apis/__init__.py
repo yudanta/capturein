@@ -58,7 +58,8 @@ def adduser():
 	else:
 		return RestHelper().build_response(412, 412, register_form.errors, 'hmm... we missing some params')
 
-@apis.route('/ambilindong', methods=['GET'])
+
+@apis.route('/get_image', methods=['GET'])
 @token_required('GET')
 def ambilindong():
 	if request.args.get('img_key') != None:
@@ -83,7 +84,7 @@ def ambilindong():
 	else:
 		return RestHelper().build_response(412, 412, {}, 'img_key params required')
 
-@apis.route('/gambarku', methods=['GET'])
+@apis.route('/all_images', methods=['GET'])
 @token_required('GET')
 def gambarku():
 	limit = 0
@@ -126,7 +127,7 @@ def gambarku():
 	else:
 		return RestHelper().build_response(404, 404, {}, 'Data not found!')
 
-@apis.route('/testqueue', methods=['POST'])
+@apis.route('/capture', methods=['POST'])
 @token_required('POST')
 def capture_queue():
 	current_user = db.User.find_one({'token_key':request.form['token']})
@@ -152,7 +153,7 @@ def capture_queue():
 				new_obj.save()
 
 				#call celery tasks
-				capture_image.delay(str(hashed))
+				capture_image.delay(str(hashed), True)
 
 				return RestHelper().build_response(200, 200, {'img_key': new_obj.hashcode}, 'Success :p')
 	

@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 
+import os
+
 from app import app, db, celery
 
 from app.helpers.Captureimg import Captureimg
 from app.helpers.S3Helper import S3Helper
 
 @celery.task(name='task.capture_image')
-def capture_image(img_code):
+def capture_image(img_code, delete_img = False):
 	#get img data from img_code and then capture and send it to amazon s3
 	if img_code != '':
 		img = db.CaptureObj.find_one({'hashcode':img_code})
@@ -27,6 +29,13 @@ def capture_image(img_code):
 
 				#save obj after push to amazon s3
 				img.save()
+
+				#if delete image = true then delete image from local path
+				if delete_img == True:
+					try:
+						os.remove(filename)
+					except Exception, e:
+						pass
 
 			else:
 				return False
