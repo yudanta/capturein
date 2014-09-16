@@ -27,7 +27,8 @@ class Captureimg():
 			#vdisplay.start()
 
 			#go capture
-			self.name = ''.join([app.config['LOCAL_STORAGE'], str(hashed), '.png'])
+			self.name = ''.join([app.root_path, '/', app.config['LOCAL_STORAGE'], str(hashed), '.png'])
+			print self.name
 			browser = webdriver.Firefox()
 			browser.get(self.url)
 			browser.save_screenshot(self.name)

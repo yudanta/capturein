@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+from datetime import datetime
 
 from app import app, db, celery
 
@@ -19,19 +20,29 @@ def capture_image(img_code, delete_img = False):
 			if filename:
 				#update aws path
 				img.is_captured = 1
+				img.captured_at = datetime.now()
 
-				#push to amazon s3
-				s3helper = S3Helper()
-				upload = s3helper.upload(filename, ''.join([str(img_code), '.png']), app.config['S3_UPLOAD_DIRECTORY'])
+				#check if config set to upload s3 then upload, if not using url direct link
+				if app.config['UPLOAD_TO_S3'] == True:
+					#push to amazon s3
+					s3helper = S3Helper()
+					upload = s3helper.upload(filename, ''.join([str(img_code), '.png']), app.config['S3_UPLOAD_DIRECTORY'])
 
-				if upload:
-					img.aws_path = unicode(''.join([app.config['S3_LOCATION'], app.config['S3_BUCKET'], '/', app.config['S3_UPLOAD_DIRECTORY'], '/', str(img_code), '.png']))
+					if upload:
+						img.uploaded_to_aws = 1
+						img.aws_path = unicode(''.join([app.config['S3_LOCATION'], app.config['S3_BUCKET'], '/', app.config['S3_UPLOAD_DIRECTORY'], '/', str(img_code), '.png']))	
 
-				#save obj after push to amazon s3
+				else:
+					#set img.aws_path = local path
+					img.aws_path = None
+					img.local_storage = unicode(''.join([app.config['BASE_URL'], app.config['LOCAL_STORAGE'], img_code,'.png']))
+
+
+				#save img object
 				img.save()
 
 				#if delete image = true then delete image from local path
-				if delete_img == True:
+				if delete_img == True and app.config['UPLOAD_TO_S3'] == True:
 					try:
 						os.remove(filename)
 					except Exception, e:

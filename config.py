@@ -15,6 +15,8 @@ MONGODB_PORT = 27017 #32380
 MONGODB_USERNAME = None #"capture"
 MONGODB_PASSWORD = None #"in-dong"
 
+UPLOAD_TO_S3 = False
+
 #--------------------------------------
 # AWS Config #nuwira access key
 #--------------------------------------
@@ -28,7 +30,7 @@ S3_ACL = 'public-read'
 
 AWS_FULL_URL = 'https://s3.amazonaws.com/tolong.capture.donk/'
 
-LOCAL_STORAGE = 'contents/captured_img/'
+LOCAL_STORAGE = 'storage/public/images/'
 
 #sample token : 0bonvMYlt0KuYsxfG5ucbbevydRmkvY2
 

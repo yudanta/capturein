@@ -91,7 +91,9 @@ def ambilindong():
 				'is_captured': img.is_captured,
 				'captured_at': img.captured_at,
 				'status': img.status,
+				'uploaded_to_aws': img.uploaded_to_aws,
 				'aws_path': img.aws_path,
+				'local_storage': img.local_storage,
 				'filename': img.filename
 			}
 			return RestHelper().build_response(200, 200, img_data, 'we found it :p')
@@ -133,7 +135,9 @@ def gambarku():
 				'is_captured': img.is_captured,
 				'captured_at': img.captured_at,
 				'status': img.status,
+				'uploaded_to_aws': img.uploaded_to_aws,
 				'aws_path': img.aws_path,
+				'local_storage': img.local_storage,
 				'filename': img.filename
 			}
 
@@ -161,7 +165,6 @@ def capture_queue():
 				new_obj.is_captured = 0
 				new_obj.status = 1
 				new_obj.filename = unicode(filename)
-				new_obj.local_storage = unicode(local_storage)
 				new_obj.created_by = str(current_user._id)
 				new_obj.captured_at = None
 

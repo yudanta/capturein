@@ -18,6 +18,7 @@ class CaptureObj(Document):
 		'captured_at': datetime,
 		'updated_at': datetime,
 		'status': int,
+		'uploaded_to_aws': int, 
 		'aws_path': unicode,
 		'filename': unicode,
 		'local_storage': unicode,
@@ -29,6 +30,7 @@ class CaptureObj(Document):
 	default_values = {
 		'created_at': datetime.now(),
 		'is_captured': 0,
+		'uploaded_to_aws': 0,
 		'status': 1
 	}
 

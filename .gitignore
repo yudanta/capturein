@@ -5,6 +5,7 @@ lib/
 
 #ignore content
 contents/captured_img/
+app/storage/public/images/*.png
 
 #ignore .pyc
 *.pyc

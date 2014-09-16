@@ -49,6 +49,12 @@ app.register_blueprint(apis)
 def favicon():
 	return send_from_directory(os.path.join(app.root_path, 'static'), 'ico/favicon.ico')
 
+#add handler for static local images file
+@app.route('/storage/public/images/<path:filename>')
+def get_img(filename):
+	#return '/'.join([os.path.join(app.root_path, 'storage/public/images'), filename])
+	return send_from_directory(os.path.join(app.root_path, 'storage/public/images'), filename)
+
 @app.errorhandler(404)
 def page_not_found(e):
 	#return render_template('404.html'), 404
