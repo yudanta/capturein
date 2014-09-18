@@ -20,15 +20,15 @@ UPLOAD_TO_S3 = False
 #--------------------------------------
 # AWS Config #nuwira access key
 #--------------------------------------
-AWS_ACCESS_KEY = 'AKIAIYVFRCYTH66KSFQA'
-AWS_SECRET_KEY = '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'
+AWS_ACCESS_KEY = '<aws access key>'
+AWS_SECRET_KEY = '<aws secret key>'
 
 S3_LOCATION = 'https://s3.amazonaws.com/'
-S3_UPLOAD_DIRECTORY = 'public/storage'
-S3_BUCKET = 'tolong.capture.donk'
+S3_UPLOAD_DIRECTORY = '<your aws target upload dir>'
+S3_BUCKET = '<your aws bucket>'
 S3_ACL = 'public-read'
 
-AWS_FULL_URL = 'https://s3.amazonaws.com/tolong.capture.donk/'
+AWS_FULL_URL = '<your aws full url>'
 
 LOCAL_STORAGE = 'storage/public/images/'
 

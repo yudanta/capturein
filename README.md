@@ -7,7 +7,9 @@
 > Situ pengen mana yang di screenshoot, kita ambilin deh :p
 
 ## App requirements
-This app required celery as message queue, and redis as broker, beause we love non blocking app.
+Aplikasi ini membutuhkan celery sebagai message queue dan redis sebagai brokernya
+
+aplikasi ini juga membutuhkan mongodb sebagai database
 
 ## Installation
 
@@ -34,7 +36,7 @@ celery -A app.celery worker
 ## Api Definition
 nah ini yang paling penting mungkin yak, berikut api definition + flow dari capturiein donk.
 
-*  Register
+*  **Register**
 
 every activity in **capturein** need token key sebagai authenticated method, untuk mendapatkan token key silahkan mendaftar dengan menggunakan username, email dan password.
 ### Api endpoint
@@ -61,7 +63,7 @@ password	[string][required]
 }
 ```
 
-* Auth
+* **Auth**
 
 untuk mendapatkan token key kembali, pengguna cukup memanggil method auth dengan parameter username/email dan password yang telah di registrasikan 
 
@@ -87,7 +89,7 @@ password	[string][required]
 }
 ```
 
-*  Capture image
+*  **Capture image**
 
 Untuk melakukan capture image pengguna cukup melakukan post pada api endpoint capture dengan parameter token key dan url dari halaman web yang ingin di screenshoot. API akan mengembalikan img_key yang dapat digunakan untuk mengambil data-data image dari web yang di screenshoot, dikarenakan proses pemrosesan yang dilakukan dengan metode asynchronous dan queue, proses pengambilan gambar bisa saja membutuhkan waktu selama beberapa detik/menit. nantinya hasil gambar dapat diambil dengan menggunakan img_key dari output api endpoint ini
 
@@ -113,7 +115,7 @@ url			[valid http url][required]
 }
 ```
 
-* get captured image by img_code
+* **get captured image by img_code**
 
 Setelah melakukan permintaan untuk mengcapture sebuah halaman web melalui api **capture** dan mendapat kembalian berupa img_key, pengguna dapat mengecek dan mengambil data-data image hasil proses screenshoot halaman web dengan img_key tersebut.
 
@@ -146,7 +148,7 @@ img_key			[string][required]
 }
 ```
 
-* get all image captured by user
+* **get all image captured by user**
 
 Untuk melihat daftar atau history halaman yang di screenshoot oleh seorang user dapat mengunakan api get list image dengan memasukkan parametr token. **API** akan mereturn list dari daftar web yang pernah diminta untuk di screenshoot oleh pengguna.
 
